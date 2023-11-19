@@ -13,6 +13,7 @@
    <div class="box">
     <p class="label">to-do-list</p>
     <input type="text" class="text">
+    <p class="alert">please enter some todo task</p>
     <!-- <div class="note">
         <ul>
             <li>hiii
@@ -30,23 +31,24 @@
      try {
      textinput.addEventListener("keyup",function(event){
         if(event.key == "Enter"){
-            if(this.value == ""){
-                alert("Please enter something")
-            }else{
-                const valuetext = this.value;
-            console.log(valuetext)
-            detanote(valuetext)
-            this.value = ""
-            
-                // const note3 = document.querySelector(".note ul li");
-                // const data = [];
-                // note3.foreach((note)=>{
-                //     data.push(note.value)
-                // })
-            localStorage.setItem("note",JSON.stringify(valuetext))
-            }
-       
+    if(this.value == ""){
+        const alerterror = document.getElementsByClassName("alert")
+        for(let i = 0; i < alerterror.length; i++) {
+            alerterror[i].classList.add("error");
         }
+    }else{
+        const alerterror = document.getElementsByClassName("alert")
+        for(let i = 0; i < alerterror.length; i++) {
+            alerterror[i].classList.remove("error");
+        }
+        const valuetext = this.value;
+        
+        detanote(valuetext)
+        this.value = ""
+        localStorage.setItem("note",JSON.stringify(valuetext))
+    }
+}
+
      })
     } catch (error) {
             console.log("failed to save data in localstorage")
@@ -67,7 +69,7 @@
         note.remove()
         
        })
-        console.log(note)
+       
     box1.appendChild(note)
 
 
